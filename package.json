@@ -1,0 +1,36 @@
+{
+  "name": "v2ex-cli",
+  "version": "1.0.0",
+  "description": "v2ex-cli",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp build:clean && gulp build && gulp build:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WittBulter/v2ex-cli.git"
+  },
+  "keywords": [
+    "v2ex",
+    "v2ex-cli"
+  ],
+  "author": "WittBulter (nanazuimeng123@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WittBulter/v2ex-cli/issues"
+  },
+  "homepage": "https://github.com/WittBulter/v2ex-cli#readme",
+  "dependencies": {
+    "commander": "^2.11.0"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.11.0",
+    "del": "^3.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-cached": "^1.1.1",
+    "gulp-tslint": "^8.1.2",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3",
+    "yargs": "^9.0.1"
+  }
+}
