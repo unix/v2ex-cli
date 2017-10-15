@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "v2ex-cli",
   "main": "index.js",
+  "preferGlobal": true,
   "scripts": {
-    "start": "gulp build:clean && gulp build && gulp build:watch"
+    "start": "gulp build:clean && gulp build && cp ./package.json ./bundle && gulp build:watch"
+  },
+  "bin": {
+    "v2": "bin/v2.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +25,11 @@
   },
   "homepage": "https://github.com/WittBulter/v2ex-cli#readme",
   "dependencies": {
-    "commander": "^2.11.0"
+    "chalk": "^2.1.0",
+    "cli-table2": "^0.2.0",
+    "commander": "^2.11.0",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
     "@types/commander": "^2.11.0",
