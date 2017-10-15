@@ -8,7 +8,7 @@ const table = new Table({
 
 posts.index().then(posts => {
   if (!posts || !posts.length) return console.log('No content')
-  storage.set('posts', posts)
+  storage.set('posts', posts).then()
   const rows = posts.map(row => ([
     String(row.id),
     String(row.title),
