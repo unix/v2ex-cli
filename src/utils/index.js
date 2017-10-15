@@ -1,3 +1,4 @@
 const base = require('./base')
+const storage = require('./storage')
 
-module.exports = base
+module.exports = Object.assign({}, base, storage)
