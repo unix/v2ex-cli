@@ -1,5 +1,6 @@
 const fs = require('fs')
 const promisify = require('util').promisify
+const childProcess = require('child_process')
 const request = require('request-promise-native')
 const host = 'https://www.v2ex.com/api'
 const commander = require('commander')
@@ -28,5 +29,9 @@ module.exports = {
   makeHeader,
   request,
   readDir: promisify(fs.readdir),
+  readFile: promisify(fs.readFile),
+  writeFile: promisify(fs.writeFile),
+  exists: promisify(fs.exists),
+  spawnSync: childProcess.spawnSync,
 }
 
