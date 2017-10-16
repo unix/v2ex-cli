@@ -41,6 +41,3 @@ const findPostIndex = async(page, node = {}) => {
   await findPostIndex(page || 1)
 })()
 
-module.exports = {
-  findPostIndex,
-}

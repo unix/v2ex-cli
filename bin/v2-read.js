@@ -4,23 +4,23 @@ const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
 const log = new ora('check params..').start()
-
 // parse id
 commander.parse(process.argv)
 
 const show = p => {
-  console.log(`post: ${p.id}`)
+  log.clear()
+  log.info(`post: ${p.id}`)
   console.log(chalk.black.bgWhite.bold(` -${p.title}- \n`))
   console.log(`${p.content} \n`)
-  log.stop()
 }
 const findPost = async(id, cache = null) => {
+  log.clear()
   log.text = 'fetching..'
   try {
     if (cache) return show(cache)
     const post = await posts.show(id)
+    log.text = ''
     if (!post || !post.length) return log.fail('No content')
-    log.text = 'parsing..'
     show(post[0])
   } catch (e) {
     log.fail(`err: ${String(e)}`)
