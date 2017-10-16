@@ -15,6 +15,8 @@ const makeHeader = async() => {
 const apis = {
   all: `${host}/topics/latest.json`,
   topic: `${host}/topics/show.json`,
+  nodes: `${host}/nodes/all.json`,
+  show: `${host}/topics/show.json`,
 }
 
 module.exports = {
