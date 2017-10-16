@@ -1,7 +1,9 @@
 const posts = require('../src/pages/posts')
 const commander = require('commander')
 const chalk = require('chalk')
+const ora = require('ora')
 const { storage } = require('../src/utils')
+const log = new ora('check params..').start()
 
 // parse id
 commander.parse(process.argv)
@@ -10,15 +12,18 @@ const show = p => {
   console.log(`post: ${p.id}`)
   console.log(chalk.black.bgWhite.bold(` -${p.title}- \n`))
   console.log(`${p.content} \n`)
+  log.stop()
 }
 const findPost = async(id, cache = null) => {
+  log.text = 'fetching..'
   try {
     if (cache) return show(cache)
     const post = await posts.show(id)
-    if (!post || !post.length) return console.log('No content')
+    if (!post || !post.length) return log.fail('No content')
+    log.text = 'parsing..'
     show(post[0])
   } catch (e) {
-    console.log('err:' + String(e))
+    log.fail(`err: ${String(e)}`)
   }
 }
 
@@ -26,7 +31,7 @@ const findPost = async(id, cache = null) => {
 (async() => {
   const id = commander.args[0]
   if (!id) {
-    console.log('id is required, like:', chalk.blue('v2 read 10'));
+    log.fail('id is required')
     return process.exit(1)
   }
   const postsStorage = await storage.get('posts')
