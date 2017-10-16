@@ -1,10 +1,10 @@
 const { request, apis, makeHeader } = require('../utils')
 
 module.exports = {
-  index: async() => {
+  index: async(page, nodeID) => {
     try {
       const posts = await request({
-        uri: apis.all,
+        uri: nodeID ? `${apis.show}?node_id=${nodeID}` : apis.all,
         method: 'GET',
         headers: await makeHeader(),
       })
