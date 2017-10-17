@@ -2,21 +2,25 @@ const fs = require('fs')
 const promisify = require('util').promisify
 const childProcess = require('child_process')
 const request = require('request-promise-native')
-const host = 'https://www.v2ex.com/api'
+const api = 'https://www.v2ex.com/api'
+const host = 'https://www.v2ex.com'
 
-const makeHeader = async() => {
-  return {
+const makeHeader = async(headers = {}) => {
+  return Object.assign({}, {
     'User-Agent': 'v2ex-cli',
     'Content-Type': 'application/json',
     'authorization': `Token token=`,
-  }
+  }, headers)
 }
 
 const apis = {
-  all: `${host}/topics/latest.json`,
-  topic: `${host}/topics/show.json`,
-  nodes: `${host}/nodes/all.json`,
-  show: `${host}/topics/show.json`,
+  all: `${api}/topics/latest.json`,
+  topic: `${api}/topics/show.json`,
+  nodes: `${api}/nodes/all.json`,
+  show: `${api}/topics/show.json`,
+  recent: `${host}/recent`,
+  signin: `${host}/signin`,
+  host: host,
 }
 
 module.exports = {
