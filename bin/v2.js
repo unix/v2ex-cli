@@ -9,6 +9,7 @@ commander
   .command('show [page]', 'display v2ex portal page')
   .command('read [id]', 'view a topic')
   .command('nodes [name]', 'view all nodes')
+  .command('login', 'login')
   .command('next', 'next page')
   .command('pre', 'previous page')
   .parse(process.argv)
