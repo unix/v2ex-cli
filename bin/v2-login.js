@@ -1,11 +1,10 @@
-require('console-png').attachTo(console)
 const commander = require('commander')
 const chalk = require('chalk')
 const ora = require('ora')
 const inquirer = require('inquirer')
-const { storage, writeFile } = require('../src/utils')
+const { storage, writeFile,  } = require('../src/utils')
 const { create, generateOnce, download } = require('../src/pages/sessions')
-
+const termImg = require('term-img')
 
 const promps = [{
   type: 'input',
@@ -14,27 +13,51 @@ const promps = [{
   validate: input => !!input
 }, {
   type: 'password',
-  name: 'pass',
+  name: 'password',
   message: 'password:',
+  validate: input => !!input
+}]
+const verification = [{
+  type: 'input',
+  name: 'code',
+  message: 'verification code:',
   validate: input => !!input
 }]
 
 ;(async() => {
   const log = new ora('verify link..').start()
+  const verifyLog = new ora('you also need to fill in the verification code..')
+  const signinLog = new ora('signin...')
   try {
     const { cookie, result } = await generateOnce()
-    log.clear()
+    log.succeed('verify completed')
     const verify = result.find(key => key.name === 'verify')
-    const asnwers = await inquirer.prompt(promps)
+    let asnwers = await inquirer.prompt(promps)
     if (verify) {
-      log.text = 'fetch verification Code..'
-      const a = await download(verify.img, cookie)
-      log.clear()
-      console.log(123, typeof a, a)
-      // console.png(verify.img)
+      verifyLog.start()
+      const codeImage = await download(verify.img, cookie)
+      if (!codeImage) return log.fail('download verification code image fails')
+      const path = await storage.write('code.png', new Buffer(codeImage, 'binary'))
+      verifyLog.clear()
+      verifyLog.stop()
+      console.log('\n')
+      termImg(path)
+      const asnwerCode = await inquirer.prompt(verification)
+      asnwers.verify = asnwerCode.code
     }
+    asnwers.once = 'once'
+    const user = result.reduce((pre, next) => {
+      const value = asnwers[next.name]
+      return !value ? pre : Object.assign(pre, { [String(next.key)]: value })
+    }, {})
+    signinLog.start()
+    const res = await create(user, cookie)
+    console.log(res.cookie)
+    signinLog.succeed('signin successed, cookie saved.')
   } catch (e) {
     log.fail(e)
+    verifyLog.stop()
+    signinLog.stop()
   }
   
 })()
