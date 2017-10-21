@@ -1,10 +1,27 @@
 const cheerio = require('cheerio')
+
 const { request, apis, makeHeader } = require('../utils')
 
 module.exports = {
-  create: async() => {
-    const keys = await generateOnceToken()
-    
+  create: async(user, cookie) => {
+    const res = await request({
+      uri: apis.signin,
+      method: 'POST',
+      resolveWithFullResponse: true,
+      headers: await makeHeader({
+        cookie,
+      }),
+      formData: user,
+    })
+    if (res.body.includes('次数太多')) {
+      throw '尝试次数太多，请在一天后尝试'
+      return
+    }
+    console.log(res.headers['set-cookie'])
+    console.log(res.body)
+    const cookies = res.headers['set-cookie']
+    const cookieStr = [...cookies].reduce((pre, next) => pre + next, '')
+    return { cookie: cookieStr, body: res.body }
   },
   
   generateOnce: async() => {
@@ -34,7 +51,7 @@ module.exports = {
       }
       if (String(input.attribs.placeholder).includes('验证码')) {
         const img = `${apis.host}/_captcha?once=${once}`
-        return result.push({ name: 'verify', key: input.attribs.name, img })
+        result.push({ name: 'verify', key: input.attribs.name, img })
       }
     })
     return { cookie: cookieStr, result: result }
@@ -44,7 +61,12 @@ module.exports = {
     return await request({
       uri: img,
       method: 'GET',
-      headers: await makeHeader({ cookie }),
+      encoding: 'binary',
+      headers: await makeHeader({
+        cookie,
+        'Content-Type': 'image/png',
+        'Accept': 'text/html,application/xhtml+xml,image/webp,image/apng',
+      }),
     })
   }
 }
