@@ -2,8 +2,8 @@ const commander = require('commander')
 const chalk = require('chalk')
 const ora = require('ora')
 const inquirer = require('inquirer')
-const { storage, writeFile,  } = require('../src/utils')
-const { create, generateOnce, download } = require('../src/pages/sessions')
+const { storage } = require('../src/utils')
+const { create, generateOnce, download, check } = require('../src/pages/sessions')
 const termImg = require('term-img')
 
 const promps = [{
@@ -23,6 +23,10 @@ const verification = [{
   message: 'verification code:',
   validate: input => !!input
 }]
+
+const checkCookie = () => {
+
+}
 
 ;(async() => {
   const log = new ora('verify link..').start()
@@ -51,8 +55,12 @@ const verification = [{
       return !value ? pre : Object.assign(pre, { [String(next.key)]: value })
     }, {})
     signinLog.start()
-    const res = await create(user, cookie)
-    console.log(res.cookie)
+    const userToken = await create(user, cookie)
+    if (userToken && userToken.cookie) {
+      
+      storage.set('cookie', userToken.cookie)
+      const res = await check(cookie)
+    }
     signinLog.succeed('signin successed, cookie saved.')
   } catch (e) {
     log.fail(e)
