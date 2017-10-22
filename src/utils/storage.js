@@ -21,17 +21,17 @@ module.exports = {
       return result
     },
     
-    write: async(name, content) => {
+    write: async(name, content, encoding = 'utf-8') => {
       const path = `./temp/${name}`
       if (await exists(path)) spawnSync('rm', [path])
-      await writeFile(path, content, 'binary')
+      await writeFile(path, content, encoding)
       return path
     },
     
     read: async(name) => {
-      const path = `./temp/${key}`
+      const path = `./temp/${name}`
       if (!await exists(path)) return null
       return await readFile(path, 'utf-8')
-    }
+    },
   },
 }
