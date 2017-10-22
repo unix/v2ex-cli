@@ -1,19 +1,18 @@
 const cheerio = require('cheerio')
-const { request, apis, makeHeader } = require('../utils')
+const { request, apis, makeHeader, storage } = require('../utils')
+
 const parse = async(page) => {
   try {
     const posts = await request({
       uri: `${apis.recent}?p=${page}`,
       method: 'GET',
-      headers: await makeHeader(),
+      headers: await makeHeader({
+        cookie: String(await storage.read('cookie.txt')),
+      }),
     })
-    const $ = cheerio.load(String(posts), {
-      withDomLvl1: true,
-      normalizeWhitespace: false,
-      xmlMode: false,
-      decodeEntities: true
-    })
+    const $ = cheerio.load(String(posts))
   } catch (e) {
+    console.log(e)
     return e
   }
 }

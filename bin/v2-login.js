@@ -41,7 +41,7 @@ const checkCookie = () => {
       verifyLog.start()
       const codeImage = await download(verify.img, cookie)
       if (!codeImage) return log.fail('download verification code image fails')
-      const path = await storage.write('code.png', new Buffer(codeImage, 'binary'))
+      const path = await storage.write('code.png', new Buffer(codeImage, 'binary'), 'binary')
       verifyLog.clear()
       verifyLog.stop()
       console.log('\n')
