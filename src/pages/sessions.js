@@ -20,6 +20,10 @@ module.exports = {
       }
       return { cookie: '' }
     } catch (e) {
+      if (String(e).includes('次数太多')) {
+        throw '尝试次数太多，请在一天后尝试'
+        return
+      }
       if (String(e).includes('StatusCodeError: 302')) {
         let cookieStr = ''
         console.log(e.response)
