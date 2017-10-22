@@ -4,24 +4,33 @@ const { request, apis, makeHeader } = require('../utils')
 
 module.exports = {
   create: async(user, cookie) => {
-    const res = await request({
-      uri: apis.signin,
-      method: 'POST',
-      resolveWithFullResponse: true,
-      headers: await makeHeader({
-        cookie,
-      }),
-      formData: user,
-    })
-    if (res.body.includes('次数太多')) {
-      throw '尝试次数太多，请在一天后尝试'
-      return
+    try {
+      const res = await request({
+        uri: apis.signin,
+        method: 'POST',
+        resolveWithFullResponse: true,
+        headers: await makeHeader({
+          cookie,
+        }),
+        formData: Object.assign(user, { next: '/' }),
+      })
+      if (res.body.includes('次数太多')) {
+        throw '尝试次数太多，请在一天后尝试'
+        return
+      }
+      return { cookie: '' }
+    } catch (e) {
+      if (String(e).includes('StatusCodeError: 302')) {
+        let cookieStr = ''
+        console.log(e.response)
+        if (e.response && e.response.headers['set-cookie']) {
+          const cookies = e.response.headers['set-cookie']
+          cookieStr = [...cookies].reduce((pre, next) => pre + next, '')
+        }
+        return { cookie: cookieStr }
+      }
+      return e
     }
-    console.log(res.headers['set-cookie'])
-    console.log(res.body)
-    const cookies = res.headers['set-cookie']
-    const cookieStr = [...cookies].reduce((pre, next) => pre + next, '')
-    return { cookie: cookieStr, body: res.body }
   },
   
   generateOnce: async() => {
@@ -68,5 +77,19 @@ module.exports = {
         'Accept': 'text/html,application/xhtml+xml,image/webp,image/apng',
       }),
     })
-  }
+  },
+  
+  check: async(cookie) => {
+    const res = await request({
+      uri: apis.host,
+      method: 'GET',
+      resolveWithFullResponse: true,
+      headers: await makeHeader({
+        cookie,
+      }),
+    })
+    const cookies = res.headers['set-cookie']
+    const cookieStr = [...cookies].reduce((pre, next) => pre + next, '')
+    return { cookie: cookieStr, body: res.body }
+  },
 }
