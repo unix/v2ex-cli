@@ -19,6 +19,7 @@ const apis = {
   show: `${api}/topics/show.json`,
   recent: `${host}/recent`,
   signin: `${host}/signin`,
+  go: `${host}/go`,
   host: host,
 }
 

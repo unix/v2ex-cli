@@ -36,7 +36,7 @@ const storage = {
 }
 
 const getCookie = async(silent = false) => {
-  const cookie = await storage.read('cookie2')
+  const cookie = await storage.read('cookie')
   if (!cookie && !silent) {
     throw 'cookie not found, try run [v2 install] set it.'
     return ''
