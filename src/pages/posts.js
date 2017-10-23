@@ -52,6 +52,7 @@ module.exports = {
         content: $('.markdown_body').text(),
         comments: [],
         id: id,
+        once: cheerio($('input[name=once]')[0]).attr('value'),
       }
       $('.reply_content').each(function() {
         re.comments.push({
@@ -62,6 +63,26 @@ module.exports = {
       return re
     } catch (e) {
       throw e
+    }
+  },
+  
+  reply: async(id, once, content) => {
+    try {
+      const res = await request({
+        uri: `${apis.post}/${id}`,
+        method: 'POST',
+        resolveWithFullResponse: true,
+        headers: await makeHeader({
+          cookie: String(await storage.getCookie()),
+          'Referer': apis.host,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+        formData: { content, once },
+      })
+      console.log(res)
+    } catch (e) {
+      if (String(e).includes('StatusCodeError: 302')) return 'ok'
+      return e
     }
   },
 }

@@ -35,6 +35,20 @@ const storage = {
   },
 }
 
+const histroy = {
+  get: async(key = 'post') => {
+    const record = await storage.get('histroy')
+    if (!record || !record[key]) return null
+    return record[key]
+  },
+  
+  add: async(key, value) => {
+    const record = await storage.get('histroy') || {}
+    const next = Object.assign({}, record, { [String(key)]: value })
+    await storage.set('histroy', next)
+  },
+}
+
 const getCookie = async(silent = false) => {
   const cookie = await storage.read('cookie')
   if (!cookie && !silent) {
@@ -46,4 +60,5 @@ const getCookie = async(silent = false) => {
 
 module.exports = {
   storage: Object.assign(storage, { getCookie }),
+  histroy,
 }
