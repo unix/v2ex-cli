@@ -4,7 +4,7 @@ const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
 const checkLog = new ora('check params..')
-const fetchLog = new ora('fetching..')
+const fetchLog = new ora()
 // parse id
 commander.parse(process.argv)
 
@@ -13,16 +13,21 @@ const show = p => {
   fetchLog.info(`post: ${p.id}`)
   console.log(chalk.black.bgWhite.bold(` -${p.title}- \n`))
   console.log(`${p.content} \n`)
+  if (p.comments && p.comments.length) {
+    console.log('Comments:')
+    p.comments.forEach((comment, index) => {
+      console.log(chalk.bold(`-----------\n[${index}] ${comment.member}: `), `${comment.content}\n`)
+    })
+  }
 }
-const findPost = async(id, cache = null) => {
+const findPost = async(id) => {
   checkLog.stop()
-  fetchLog.start()
+  fetchLog.start(`fetching... post.${id}`)
   try {
-    if (cache) return show(cache)
     const post = await posts.show(id)
-    fetchLog.text = ''
-    if (!post || !post.length) return fetchLog.fail('No content')
-    show(post[0])
+    fetchLog.clear()
+    if (!post) return fetchLog.fail('No content')
+    show(post)
   } catch (e) {
     fetchLog.fail(`err: ${String(e)}`)
   }
@@ -31,16 +36,17 @@ const findPost = async(id, cache = null) => {
 // check id
 (async() => {
   checkLog.start()
-  const id = (commander.args || [])[0]
+  const id = commander.args[0]
   if (!id) return checkLog.fail('id is required')
   
   const postsStorage = await storage.get('posts')
   if (!postsStorage) return await findPost(id)
   
-  let post = postsStorage.find(post => post.id === id)
-  if (post && post.id) return await findPost(post.id, post)
+  // post => [id, title, re, author]
+  let post = postsStorage.find(post => post[0] === id)
+  if (post && post.id) return await findPost(post.id)
   
-  post = postsStorage.find(post => String(post.id).endsWith(id))
-  if (post && post.id) return await findPost(post.id, post)
+  post = postsStorage.find(post => String(post[0]).endsWith(id))
+  if (post && post[0]) return await findPost(post[0])
   await findPost(id)
 })()
