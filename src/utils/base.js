@@ -19,6 +19,7 @@ const apis = {
   show: `${api}/topics/show.json`,
   recent: `${host}/recent`,
   signin: `${host}/signin`,
+  post: `${host}/t`,
   go: `${host}/go`,
   host: host,
 }
@@ -31,9 +32,14 @@ const utils = {
   spawnSync: childProcess.spawnSync,
 }
 
+const checkAuthorization = body => {
+  return !String(body).includes('<a href="/signin" class="top">登录</a>')
+}
+
 module.exports = Object.assign({
   apis,
   makeHeader,
+  checkAuthorization,
   request,
 }, utils)
 
