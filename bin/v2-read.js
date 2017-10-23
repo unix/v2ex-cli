@@ -2,7 +2,7 @@ const posts = require('../src/pages/posts')
 const commander = require('commander')
 const chalk = require('chalk')
 const ora = require('ora')
-const { storage } = require('../src/utils')
+const { storage, histroy } = require('../src/utils')
 const checkLog = new ora('check params..')
 const fetchLog = new ora()
 // parse id
@@ -19,6 +19,7 @@ const show = p => {
       console.log(chalk.bold(`-----------\n[${index}] ${comment.member}: `), `${comment.content}\n`)
     })
   }
+  histroy.add('post', `${p.id}||${p.once}||${p.title}`)
 }
 const findPost = async(id) => {
   checkLog.stop()
