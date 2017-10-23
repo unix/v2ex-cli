@@ -11,6 +11,8 @@ module.exports = {
         resolveWithFullResponse: true,
         headers: await makeHeader({
           cookie,
+          'Referer': apis.signin,
+          'Content-Type': 'application/x-www-form-urlencoded',
         }),
         formData: Object.assign(user, { next: '/' }),
       })
@@ -26,7 +28,7 @@ module.exports = {
       }
       if (String(e).includes('StatusCodeError: 302')) {
         let cookieStr = ''
-        console.log(e.response)
+        console.log(123, e.response.headers, e.response.headers['set-cookie'])
         if (e.response && e.response.headers['set-cookie']) {
           const cookies = e.response.headers['set-cookie']
           cookieStr = [...cookies].reduce((pre, next) => pre + next, '')

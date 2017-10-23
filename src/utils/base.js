@@ -7,9 +7,8 @@ const host = 'https://www.v2ex.com'
 
 const makeHeader = async(headers = {}) => {
   return Object.assign({}, {
-    'User-Agent': 'v2ex-cli',
     'Content-Type': 'application/json',
-    'authorization': `Token token=`,
+    'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4`,
   }, headers)
 }
 
@@ -23,14 +22,17 @@ const apis = {
   host: host,
 }
 
-module.exports = {
-  apis,
-  makeHeader,
-  request,
+const utils = {
   readDir: promisify(fs.readdir),
   readFile: promisify(fs.readFile),
   writeFile: promisify(fs.writeFile),
   exists: promisify(fs.exists),
   spawnSync: childProcess.spawnSync,
 }
+
+module.exports = Object.assign({
+  apis,
+  makeHeader,
+  request,
+}, utils)
 
