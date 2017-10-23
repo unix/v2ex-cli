@@ -1,5 +1,5 @@
 const cheerio = require('cheerio')
-const { request, apis, makeHeader, storage } = require('../utils')
+const { request, apis, makeHeader, storage, checkAuthorization } = require('../utils')
 
 module.exports = {
   index: async(page, nodeID) => {
@@ -11,11 +11,11 @@ module.exports = {
           cookie: String(await storage.getCookie()),
         }),
       })
-      if (String(posts).includes('<a href="/signin" class="top">登录</a>')) {
+      if (!checkAuthorization(posts)) {
         throw 'cookie not found, try run [v2 install] set it.'
         return ''
       }
-      const $ = cheerio.load(String(posts), { decodeEntities: true })
+      const $ = cheerio.load(String(posts))
       let result = []
       $('span.item_title').each(function(index) {
         const postLink = cheerio(cheerio(this).find('a')[0])
@@ -38,13 +38,30 @@ module.exports = {
   show: async(id) => {
     try {
       const post = await request({
-        uri: `${apis.topic}?id=${id}`,
+        uri: `${apis.post}/${id}`,
         method: 'GET',
-        headers: await makeHeader(),
+        headers: await makeHeader({ cookie: String(await storage.getCookie()) }),
       })
-      return JSON.parse(post)
+      if (!checkAuthorization(post)) {
+        throw 'cookie not found, try run [v2 install] set it.'
+        return ''
+      }
+      const $ = cheerio.load(String(post))
+      const re = {
+        title: cheerio($('h1')[0]).text(),
+        content: $('.markdown_body').text(),
+        comments: [],
+        id: id,
+      }
+      $('.reply_content').each(function() {
+        re.comments.push({
+          content: cheerio(this).text(),
+          member: cheerio(this).parent().find('.dark').text(),
+        })
+      })
+      return re
     } catch (e) {
-      return e
+      throw e
     }
   },
 }
