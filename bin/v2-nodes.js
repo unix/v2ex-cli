@@ -26,27 +26,19 @@ const findIndex = async() => {
 }
 const findPostIndex = async(page, node = {}) => {
   const table = new Table({
-    head: ['id', 'title', 'desc', 're', 'member'],
-    colWidths: [10, 40, 50, 5, 10]
+    head: ['id', 'title', 're', 'member'],
+    colWidths: [10, 60, 5, 15]
   })
   
   try {
-    const posts = await postsRes.index(page = 1, node.id || null)
+    const posts = await postsRes.index(page, node.name || null)
     log.clear()
     if (!posts || !posts.length) return log.fail('no content')
     storage.set('posts', posts)
-    
-    const rows = posts.map(row => ([
-      String(row.id),
-      String(row.title || ''),
-      String((row.content_rendered || '').match(/[\u4e00-\u9fa5]+/g)),
-      String(row.replies),
-      String((row.member || {}).username),
-    ]))
-    table.push(...rows)
+    table.push(...posts)
     
     console.log(String(table))
-    return log.succeed(`node: ${node.title}, page: ${page}`)
+    return log.succeed(`node: ${node.name} (${node.title}), page: ${page}`)
   } catch (e) {
     return log.fail('err:' + String(e))
   }
@@ -69,6 +61,8 @@ const findPostIndex = async(page, node = {}) => {
     recommendStr && console.log('you can try:', chalk.green(recommendStr))
     return
   }
-  await findPostIndex(0, node)
+  
+  const page = (commander.args || [1, 1])[1]
+  await findPostIndex(page, node)
 })()
 

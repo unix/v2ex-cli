@@ -11,8 +11,8 @@ commander.parse(process.argv)
 const findPostIndex = async(page, node = {}) => {
   fetchLog.start()
   const table = new Table({
-    head: ['id', 'title', 'desc', 're', 'member'],
-    colWidths: [10, 40, 50, 5, 10]
+    head: ['id', 'title', 're', 'member'],
+    colWidths: [10, 60, 5, 15]
   })
   
   try {
@@ -22,16 +22,8 @@ const findPostIndex = async(page, node = {}) => {
       return fetchLog.fail('no content')
     }
     storage.set('posts', posts)
-    
-    const rows = posts.map(row => ([
-      String(row.id),
-      String(row.title || ''),
-      String((row.content_rendered || '').match(/[\u4e00-\u9fa5]+/g)),
-      String(row.replies),
-      String((row.member || {}).username),
-    ]))
-    table.push(...rows)
-    
+    table.push(...posts)
+    fetchLog.clear()
     console.log(String(table))
     return fetchLog.succeed(node && node.id ? `node: ${node.title}` : `latest, page: ${page}`)
   } catch (e) {
