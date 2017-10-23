@@ -3,37 +3,37 @@ const commander = require('commander')
 const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
-const log = new ora('check params..').start()
+const checkLog = new ora('check params..')
+const fetchLog = new ora('fetching..')
 // parse id
 commander.parse(process.argv)
 
 const show = p => {
-  log.clear()
-  log.info(`post: ${p.id}`)
+  fetchLog.clear()
+  fetchLog.info(`post: ${p.id}`)
   console.log(chalk.black.bgWhite.bold(` -${p.title}- \n`))
   console.log(`${p.content} \n`)
 }
 const findPost = async(id, cache = null) => {
-  log.clear()
-  log.text = 'fetching..'
+  checkLog.stop()
+  fetchLog.start()
   try {
     if (cache) return show(cache)
     const post = await posts.show(id)
-    log.text = ''
-    if (!post || !post.length) return log.fail('No content')
+    fetchLog.text = ''
+    if (!post || !post.length) return fetchLog.fail('No content')
     show(post[0])
   } catch (e) {
-    log.fail(`err: ${String(e)}`)
+    fetchLog.fail(`err: ${String(e)}`)
   }
 }
 
 // check id
 (async() => {
-  const id = commander.args[0]
-  if (!id) {
-    log.fail('id is required')
-    return process.exit(1)
-  }
+  checkLog.start()
+  const id = (commander.args || [])[0]
+  if (!id) return checkLog.fail('id is required')
+  
   const postsStorage = await storage.get('posts')
   if (!postsStorage) return await findPost(id)
   

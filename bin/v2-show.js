@@ -3,12 +3,13 @@ const commander = require('commander')
 const ora = require('ora')
 const { storage } = require('../src/utils')
 const { index } = require('../src/pages/posts')
+const fetchLog = new ora('fetching..')
 
 // parse page
 commander.parse(process.argv)
 
 const findPostIndex = async(page, node = {}) => {
-  const log = new ora('fetching..').start()
+  fetchLog.start()
   const table = new Table({
     head: ['id', 'title', 'desc', 're', 'member'],
     colWidths: [10, 40, 50, 5, 10]
@@ -16,7 +17,10 @@ const findPostIndex = async(page, node = {}) => {
   
   try {
     const posts = await index(page, node.id || null)
-    if (!posts || !posts.length) return log.fail('no content')
+    if (!posts || !posts.length) {
+      fetchLog.text = ''
+      return fetchLog.fail('no content')
+    }
     storage.set('posts', posts)
     
     const rows = posts.map(row => ([
@@ -29,9 +33,10 @@ const findPostIndex = async(page, node = {}) => {
     table.push(...rows)
     
     console.log(String(table))
-    return log.succeed(node && node.id ? `node: ${node.title}` : `latest, page: ${page}`)
+    return fetchLog.succeed(node && node.id ? `node: ${node.title}` : `latest, page: ${page}`)
   } catch (e) {
-    return log.fail('err:' + String(e))
+    fetchLog.clear()
+    return fetchLog.fail('Err: ' + String(e))
   }
 }
 

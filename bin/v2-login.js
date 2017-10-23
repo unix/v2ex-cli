@@ -1,4 +1,3 @@
-const commander = require('commander')
 const chalk = require('chalk')
 const ora = require('ora')
 const inquirer = require('inquirer')
@@ -24,9 +23,7 @@ const verification = [{
   validate: input => !!input
 }]
 
-const checkCookie = () => {
-
-}
+return console.log(chalk.green('Login is unavailable, use [v2 cookie] set cookie'))
 
 ;(async() => {
   const log = new ora('verify link..').start()
@@ -49,7 +46,7 @@ const checkCookie = () => {
       const asnwerCode = await inquirer.prompt(verification)
       asnwers.verify = asnwerCode.code
     }
-    asnwers.once = 'once'
+    asnwers.once = (result.find(r => r.name === 'once') || {}).value
     const user = result.reduce((pre, next) => {
       const value = asnwers[next.name]
       return !value ? pre : Object.assign(pre, { [String(next.key)]: value })
@@ -57,8 +54,7 @@ const checkCookie = () => {
     signinLog.start()
     const userToken = await create(user, cookie)
     if (userToken && userToken.cookie) {
-      
-      storage.set('cookie', userToken.cookie)
+      storage.write('test', userToken.cookie)
       const res = await check(cookie)
     }
     signinLog.succeed('signin successed, cookie saved.')
