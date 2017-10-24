@@ -6,7 +6,7 @@ commander
   .parse(process.argv)
 
 // check id
-(async() => {
+;(async() => {
   const page = commander.args[0]
   await renderer.renderPosts(page || 1)
 })()
