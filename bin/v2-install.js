@@ -8,7 +8,6 @@ const saveLog = new ora('save cookie..')
 // parse page
 commander.parse(process.argv)
 console.log(chalk.green.bold('Welcome, V2ER.'))
-// console.log(chalk.green('If you are interested, please give me a star: github.com/WittBulter/v2ex-cli'))
 
 new ora().start().info('Before use, you need to add some set items..')
 const promps = [{
