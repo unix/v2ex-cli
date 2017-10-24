@@ -12,6 +12,7 @@ commander
   .command('cache', 'show cache')
   .command('reply', 'create a reply')
   .command('install ', 'edit config and init')
+  .command('implode ', 'destroy self')
   // .command('login', 'login')
   .command('go [page_number]', 'pagination')
   .parse(process.argv)
