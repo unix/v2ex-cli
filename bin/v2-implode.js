@@ -1,5 +1,6 @@
 const chalk = require('chalk')
-const { spawnSync } = require('../utils')
+const inquirer = require('inquirer')
+const { spawnSync } = require('../src/utils')
 
 const promps = [{
   type: 'input',
