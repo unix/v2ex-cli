@@ -1,6 +1,6 @@
 {
   "name": "v2ex-cli",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "v2ex-cli",
   "main": "index.js",
   "preferGlobal": true,
@@ -16,6 +16,7 @@
   ],
   "repository": {
     "type": "git",
+    "update": "https://raw.githubusercontent.com/WittBulter/v2ex-cli/master/package.json",
     "url": "git+https://github.com/WittBulter/v2ex-cli.git"
   },
   "keywords": [
