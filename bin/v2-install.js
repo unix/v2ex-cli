@@ -3,6 +3,7 @@ const inquirer = require('inquirer')
 const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
+const { check } = require('../src/services/version')
 const saveLog = new ora('save cookie..')
 
 // parse page
@@ -20,6 +21,10 @@ const promps = [{
 
 // check id
 ;(async() => {
+  // check version
+  await check()
+  
+  // run inquirer
   const asnwers = await inquirer.prompt(promps)
   const cookie = asnwers.cookie
   if (cookie.length < 10 || !cookie.includes('A2=')) return console.log(chalk.red('bad cookie'))
