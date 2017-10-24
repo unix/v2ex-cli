@@ -8,7 +8,7 @@ const saveLog = new ora('save cookie..')
 
 // parse page
 commander.parse(process.argv)
-console.log(chalk.green.bold('Welcome, V2ER.'))
+console.log(chalk.green.bold('  Hello, v2er.'))
 
 new ora().start().info('Before use, you need to add some set items..')
 const promps = [{
