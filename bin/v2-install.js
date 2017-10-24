@@ -5,7 +5,7 @@ const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
 const { check } = require('../src/services/version')
-const saveLog = new ora('save cookie..')
+const saveLog = new ora('check version..')
 
 // parse page
 commander.parse(process.argv)
@@ -13,9 +13,11 @@ const table = new Table({ chars: {'mid': '', 'left-mid': '', 'mid-mid': '', 'rig
 table.push(
   [`                ${chalk.green.bold('HELLO, V2ER.')}                `],
 )
-console.log(String(table))
+console.log(String(table), '\n')
+new ora()
+  .info('Before use, you need set some items..')
+  .stop()
 
-new ora().start().info('Before use, you need to add some set items..')
 const promps = [{
   type: 'input',
   name: 'cookie',
@@ -23,17 +25,17 @@ const promps = [{
   validate: input => !!input
 }]
 
-
 // check id
 ;(async() => {
   // check version
-  await check()
-  
+  saveLog.start()
+  await check(saveLog)
   // run inquirer
   const asnwers = await inquirer.prompt(promps)
   const cookie = asnwers.cookie
   if (cookie.length < 10 || !cookie.includes('A2=')) return console.log(chalk.red('bad cookie'))
   
+  saveLog.text = 'save cookie..'
   saveLog.start()
   await storage.write('cookie', cookie)
   saveLog.succeed('cookie saved')
