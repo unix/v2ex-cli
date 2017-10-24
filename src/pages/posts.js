@@ -2,8 +2,8 @@ const cheerio = require('cheerio')
 const { request, apis, makeHeader, storage, checkAuthorization } = require('../utils')
 
 module.exports = {
-  index: async(page, nodeID) => {
-    const uri = nodeID ? `${apis.go}/${nodeID}?p=${page}` : `${apis.recent}?p=${page}`
+  index: async(page, node = null) => {
+    const uri = node ? `${apis.go}/${node}?p=${page}` : `${apis.recent}?p=${page}`
     try {
       const posts = await request({
         uri, method: 'GET',
