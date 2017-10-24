@@ -1,5 +1,6 @@
 const commander = require('commander')
 const inquirer = require('inquirer')
+const Table = require('cli-table2')
 const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
@@ -8,7 +9,11 @@ const saveLog = new ora('save cookie..')
 
 // parse page
 commander.parse(process.argv)
-console.log(chalk.green.bold('  Hello, v2er.'))
+const table = new Table({ chars: {'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' }})
+table.push(
+  [`                ${chalk.green.bold('HELLO, V2ER.')}                `],
+)
+console.log(String(table))
 
 new ora().start().info('Before use, you need to add some set items..')
 const promps = [{
