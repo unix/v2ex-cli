@@ -33,12 +33,16 @@ const promps = [{
   // run inquirer
   const asnwers = await inquirer.prompt(promps)
   const cookie = asnwers.cookie
-  if (cookie.length < 10 || !cookie.includes('A2=')) return console.log(chalk.red('bad cookie'))
+  if (cookie.length < 10 || !cookie.includes('A2=')) {
+    console.log(chalk.red('bad cookie'))
+    return process.exit(1)
+  }
   
   saveLog.text = 'save cookie..'
   saveLog.start()
   await storage.write('cookie', cookie)
   saveLog.succeed('cookie saved')
+  process.exit(1)
 })()
 
 

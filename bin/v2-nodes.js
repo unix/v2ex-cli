@@ -9,7 +9,9 @@ const log = new ora('check params..').start()
 // parse search name
 commander.parse(process.argv)
 
-const showIndex = len => log.succeed(`nodes updated, count: ${len}.\ntry run [v2 nodes {note_name}]`)
+const showIndex = len => {
+  log.succeed(`nodes updated, count: ${len}.\ntry run [${chalk.green('v2 nodes {note_name}')}]`)
+}
 const findIndex = async() => {
   log.text = 'fetching..'
   const notes = await storage.get('nodes')
