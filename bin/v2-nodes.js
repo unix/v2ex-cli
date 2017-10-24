@@ -1,10 +1,9 @@
-const Table = require('cli-table2')
 const nodesRes = require('../src/pages/nodes')
-const postsRes = require('../src/pages/posts')
 const commander = require('commander')
 const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
+const renderer = require('../src/services/renderer')
 const log = new ora('check params..').start()
 
 // parse search name
@@ -22,25 +21,6 @@ const findIndex = async() => {
     showIndex(notesFromFetch.length)
   } catch (e) {
     log.fail(`err: ${String(e)}`)
-  }
-}
-const findPostIndex = async(page, node = {}) => {
-  const table = new Table({
-    head: ['id', 'title', 're', 'member'],
-    colWidths: [10, 60, 5, 15]
-  })
-  
-  try {
-    const posts = await postsRes.index(page, node.name || null)
-    log.clear()
-    if (!posts || !posts.length) return log.fail('no content')
-    storage.set('posts', posts)
-    table.push(...posts)
-    
-    console.log(String(table))
-    return log.succeed(`node: ${node.name} (${node.title}), page: ${page}`)
-  } catch (e) {
-    return log.fail('err:' + String(e))
   }
 }
 
@@ -63,6 +43,7 @@ const findPostIndex = async(page, node = {}) => {
   }
   
   const page = (commander.args || [1, 1])[1]
-  await findPostIndex(page, node)
+  log.stop()
+  await renderer.renderPosts(page, node)
 })()
 

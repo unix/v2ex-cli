@@ -6,14 +6,17 @@ const { storage, histroy } = require('../src/utils')
 const checkLog = new ora('check params..')
 const fetchLog = new ora()
 // parse id
-commander.parse(process.argv)
+commander
+  .option('-s, --silence', 'silence mode, hidden all comments')
+  .parse(process.argv)
+const silence = commander.silence || false
 
 const show = p => {
   fetchLog.clear()
   fetchLog.info(`post: ${p.id}`)
   console.log(chalk.black.bgWhite.bold(` -${p.title}- \n`))
   console.log(`${p.content} \n`)
-  if (p.comments && p.comments.length) {
+  if (!silence && p.comments && p.comments.length) {
     console.log('Comments:')
     p.comments.forEach((comment, index) => {
       console.log(chalk.bold(`-----------\n[${index}] ${comment.member}: `), `${comment.content}\n`)
