@@ -1,6 +1,6 @@
 {
   "name": "v2ex-cli",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "v2ex-cli",
   "main": "index.js",
   "preferGlobal": true,
@@ -10,6 +10,10 @@
   "bin": {
     "v2": "bin/v2.js"
   },
+  "files": [
+    "bin",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WittBulter/v2ex-cli.git"
