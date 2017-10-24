@@ -29,6 +29,7 @@ const utils = {
   readFile: promisify(fs.readFile),
   writeFile: promisify(fs.writeFile),
   exists: promisify(fs.exists),
+  stat: promisify(fs.stat),
   spawnSync: childProcess.spawnSync,
 }
 
