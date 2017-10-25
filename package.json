@@ -6,6 +6,7 @@
   "preferGlobal": true,
   "scripts": {
     "build": "npm unlink && rm -r ./dist && webpack && npm link",
+    "ci": "webpack",
     "lint": "eslint src/** bin/**"
   },
   "bin": {
