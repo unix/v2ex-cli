@@ -23,8 +23,8 @@ const verification = [{
 }]
 
 ;(async() => {
-  const log = new ora('verify link..').start()
-  const verifyLog = new ora('you also need to fill in the verification code..')
+  const log = new ora('verify link...').start()
+  const verifyLog = new ora('you also need to fill in the verification code...')
   const signinLog = new ora('signin...')
   try {
     const { cookie, result } = await generateOnce()

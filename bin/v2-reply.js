@@ -5,7 +5,7 @@ const ora = require('ora')
 const posts = require('../src/pages/posts')
 const { histroy } = require('../src/utils')
 const replyLog = new ora('find posts recently browsed...')
-const submitLog = new ora('submit..')
+const submitLog = new ora('submit...')
 
 // parse page
 commander.parse(process.argv)

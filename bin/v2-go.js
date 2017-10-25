@@ -2,7 +2,7 @@ const commander = require('commander')
 const { histroy } = require('../src/utils')
 const ora = require('ora')
 const renderer = require('../src/services/renderer')
-const pageLog = new ora('check page..')
+const pageLog = new ora('check page...')
 
 // parse search name
 commander

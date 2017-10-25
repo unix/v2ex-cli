@@ -3,7 +3,7 @@ const commander = require('commander')
 const chalk = require('chalk')
 const ora = require('ora')
 const { storage, histroy } = require('../src/utils')
-const checkLog = new ora('check params..')
+const checkLog = new ora('check params...')
 const fetchLog = new ora()
 // parse id
 commander

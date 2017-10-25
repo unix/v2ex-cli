@@ -4,7 +4,7 @@ const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')
 const renderer = require('../src/services/renderer')
-const log = new ora('check params..').start()
+const log = new ora('check params...').start()
 
 // parse search name
 commander.parse(process.argv)
@@ -13,7 +13,7 @@ const showIndex = len => {
   log.succeed(`nodes updated, count: ${len}.\ntry run [${chalk.green('v2 nodes {note_name}')}]`)
 }
 const findIndex = async() => {
-  log.text = 'fetching..'
+  log.text = 'fetching...'
   const notes = await storage.get('nodes')
   if (notes) return showIndex(notes.length)
   try {
