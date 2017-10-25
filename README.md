@@ -42,23 +42,32 @@ npm i -g v2ex-cli
 显示图片不能在所有终端做到非常好的兼容。同时错误的登录会导致 IP 被封锁一天。(v2ex 近期的策略太暴力了)
 
 
-### 预览
-- 安装
-  ![install](https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png)
 
-- 列表
-  ![read](https://github.com/WittBulter/v2ex-cli/blob/master/assets/read.png)
-
-- 阅读
-  ![read2](https://github.com/WittBulter/v2ex-cli/blob/master/assets/read2.png)
-
-- 节点
-  ![node](https://github.com/WittBulter/v2ex-cli/blob/master/assets/node.png)
-
-- 回复
-  ![node](https://github.com/WittBulter/v2ex-cli/blob/master/assets/reply.png)
-
-
+<p><details>
+  <summary><b>预览</b> 点击打开</summary>
+  <ul>
+    <li>
+      <h3>安装</h3>
+      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png">
+    </li>
+    <li>
+      <h3>列表</h3>
+      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/read.png">
+    </li>
+    <li>
+      <h3>阅读</h3>
+      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/read2.png">
+    </li>
+    <li>
+      <h3>节点</h3>
+      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/node.png">
+    </li>
+    <li>
+      <h3>回复</h3>
+      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/reply.png">
+    </li>
+  </ul>
+</details></p>
 
 
 
