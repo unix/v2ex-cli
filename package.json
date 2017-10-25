@@ -1,6 +1,6 @@
 {
   "name": "v2ex-cli",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "v2ex-cli",
   "main": "index.js",
   "preferGlobal": true,
