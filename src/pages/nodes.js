@@ -13,6 +13,6 @@ module.exports = {
       return e
     }
   },
-  search: async(id) => {
+  search: async() => {
   },
 }

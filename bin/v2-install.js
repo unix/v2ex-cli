@@ -22,7 +22,7 @@ const promps = [{
   type: 'input',
   name: 'cookie',
   message: 'cookie:',
-  validate: input => !!input
+  validate: input => !!input,
 }]
 
 // check id

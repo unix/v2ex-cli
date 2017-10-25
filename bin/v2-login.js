@@ -1,4 +1,3 @@
-const chalk = require('chalk')
 const ora = require('ora')
 const inquirer = require('inquirer')
 const { storage } = require('../src/utils')
@@ -9,21 +8,19 @@ const promps = [{
   type: 'input',
   name: 'username',
   message: 'username',
-  validate: input => !!input
+  validate: input => !!input,
 }, {
   type: 'password',
   name: 'password',
   message: 'password:',
-  validate: input => !!input
+  validate: input => !!input,
 }]
 const verification = [{
   type: 'input',
   name: 'code',
   message: 'verification code:',
-  validate: input => !!input
+  validate: input => !!input,
 }]
-
-return console.log(chalk.green('Login is unavailable, use [v2 cookie] set cookie'))
 
 ;(async() => {
   const log = new ora('verify link..').start()
@@ -33,7 +30,7 @@ return console.log(chalk.green('Login is unavailable, use [v2 cookie] set cookie
     const { cookie, result } = await generateOnce()
     log.succeed('verify completed')
     const verify = result.find(key => key.name === 'verify')
-    let asnwers = await inquirer.prompt(promps)
+    const asnwers = await inquirer.prompt(promps)
     if (verify) {
       verifyLog.start()
       const codeImage = await download(verify.img, cookie)
@@ -55,7 +52,7 @@ return console.log(chalk.green('Login is unavailable, use [v2 cookie] set cookie
     const userToken = await create(user, cookie)
     if (userToken && userToken.cookie) {
       storage.write('test', userToken.cookie)
-      const res = await check(cookie)
+      await check(cookie)
     }
     signinLog.succeed('signin successed, cookie saved.')
   } catch (e) {

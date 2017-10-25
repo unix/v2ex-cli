@@ -15,7 +15,7 @@ const promps = [{
   type: 'input',
   name: 'reply',
   message: 'reply:',
-  validate: input => !!input
+  validate: input => !!input,
 }]
 
 ;(async() => {

@@ -9,7 +9,7 @@ module.exports = {
     const fetchLog = new ora('fetching..').start()
     const table = new Table({
       head: ['id', 'title', 're', 'member'],
-      colWidths: [10, 60, 5, 15]
+      colWidths: [10, 60, 5, 15],
     })
   
     try {
@@ -24,7 +24,7 @@ module.exports = {
       console.log(String(table))
       
       histroy.add('list', `${page}||${node.title || null}||${node.name || null}`)
-      return fetchLog.succeed((node && node.title ? `node: ${node.title}，` : `latest,`) + `page: ${page}`)
+      return fetchLog.succeed((node && node.title ? `node: ${node.title}，` : 'latest,') + `page: ${page}`)
     } catch (e) {
       fetchLog.clear()
       return fetchLog.fail('Err: ' + String(e))

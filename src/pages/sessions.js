@@ -18,13 +18,11 @@ module.exports = {
       })
       if (res.body.includes('次数太多')) {
         throw '尝试次数太多，请在一天后尝试'
-        return
       }
       return { cookie: '' }
     } catch (e) {
       if (String(e).includes('次数太多')) {
         throw '尝试次数太多，请在一天后尝试'
-        return
       }
       if (String(e).includes('StatusCodeError: 302')) {
         let cookieStr = ''
@@ -48,13 +46,12 @@ module.exports = {
     })
     if (res.body.includes('次数太多')) {
       throw '尝试次数太多，请在一天后尝试'
-      return
     }
     const cookies = res.headers['set-cookie']
     const cookieStr = [...cookies].reduce((pre, next) => pre + next, '')
     const $ = cheerio.load(res.body)
     const inputs = $('form input.sl')
-    let result = []
+    const result = []
     const once = String($('.google-signin')[0].attribs.onclick || '').match(/\d+/g)[0]
     result.push({ name: 'once', key: 'once', value: once })
     inputs.each((index, input) => {

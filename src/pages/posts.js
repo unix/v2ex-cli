@@ -13,20 +13,20 @@ module.exports = {
       })
       if (!checkAuthorization(posts)) {
         throw 'cookie not found, try run [v2 install] set it.'
-        return ''
       }
       const $ = cheerio.load(String(posts))
-      let result = []
-      $('span.item_title').each(function(index) {
+      const result = []
+      $('span.item_title').each(function() {
         const postLink = cheerio(cheerio(this).find('a')[0])
         const userLink = cheerio(this).parents('tr').find('img.avatar').parent()
         const links = cheerio(this).parents('tr').find('a.count_livid')
         const replies = (links && links[0]) ? cheerio(links[0]).attr('href').split('reply')[1] : 0
+        // [id, title, re, member]
         result.push([
-          postLink.attr('href').split('#')[0].match(/\d+/g)[0],   // id
-          postLink.text(),    // title
-          replies,            // re
-          userLink.attr('href').split('member/')[1],    // member
+          postLink.attr('href').split('#')[0].match(/\d+/g)[0],
+          postLink.text(),
+          replies,
+          userLink.attr('href').split('member/')[1],
         ])
       })
       return result
@@ -44,7 +44,6 @@ module.exports = {
       })
       if (!checkAuthorization(post)) {
         throw 'cookie not found, try run [v2 install] set it.'
-        return ''
       }
       const $ = cheerio.load(String(post))
       const re = {

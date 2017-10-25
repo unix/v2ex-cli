@@ -4,11 +4,11 @@ const commander = require('commander')
 const chalk = require('chalk')
 const { version } = require('../package.json')
 const v = process.version.match(/\d+/g)[0]
-if (v < 81) {
+if (v < 8) {
   console.log(chalk.yellow('require NodeJS 8.x+ version'))
   console.log(chalk.yellow('you need upgrade NodeJS\n'))
   console.log('progress over stability ———— DHH')
-  return process.exit(1)
+  process.exit(1)
 }
 commander
   .version(version)

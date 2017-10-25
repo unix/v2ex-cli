@@ -8,7 +8,7 @@ const promps = [{
   type: 'input',
   name: 'continue',
   message: 'continue: Y / N(default)',
-  validate: input => !!input
+  validate: input => !!input,
 }]
 
 ;(async() => {

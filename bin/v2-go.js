@@ -19,8 +19,8 @@ commander
   if (!list) return pageLog.fail('there is no record')
   const [page, title, name] = list.split('||')
   const node = {
-    title: (!title || title == 'null') ? null : title,
-    name: (!name || name == 'null') ? null : name,
+    title: (!title || title === 'null') ? null : title,
+    name: (!name || name === 'null') ? null : name,
   }
   
   // next page (default action)

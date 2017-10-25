@@ -31,7 +31,7 @@ const deleteAllCache = async() => {
     type: 'input',
     name: 'continue',
     message: 'continue: Y / N(default)',
-    validate: input => !!input
+    validate: input => !!input,
   }]
   const asnwers = await inquirer.prompt(promps)
   const toggle = String(asnwers.continue).toLowerCase() === 'y'

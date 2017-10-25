@@ -28,7 +28,7 @@ module.exports = {
         console.log('\n')
         table.push(
           [`V2EX CLI ${latestVersion} has been released`],
-          [`run [${chalk.green('npm update v2ex-cli -g')}] to update`],
+          [`run [${chalk.green('npm i v2ex-cli -g')}] to update`],
         )
         console.log(String(table))
         console.log('\n')
