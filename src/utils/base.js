@@ -1,5 +1,5 @@
 const fs = require('fs')
-const promisify = require('util').promisify
+const promisify = require('util.promisify')
 const childProcess = require('child_process')
 const request = require('request-promise-native')
 const api = 'https://www.v2ex.com/api'
