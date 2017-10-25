@@ -1,7 +1,7 @@
 const commander = require('commander')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
-const { readDir, stat, spawnSync } = require('../src/utils')
+const { readDir, stat, spawnSync, exists } = require('../src/utils')
 
 // parse page
 commander
@@ -10,9 +10,11 @@ commander
   .parse(process.argv)
   
 const showAllCache = async(all = false) => {
+  if (!await exists('./temp/')) return console.log(chalk.green('no cache'))
   const dir = await readDir('./temp/')
   if (!dir || !dir.length) return console.log(chalk.green('no cache'))
   const { size } = await stat('./temp/')
+  
   if (!all) {
     console.log(chalk.green(`cache_size: ${size}k`))
     return console.log(chalk.yellow('run [v2 cache -a] view all'))
