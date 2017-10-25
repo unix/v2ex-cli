@@ -14,7 +14,9 @@ npm i -g v2ex-cli
 
 - 列表阅读: `v2 show`
 
-- 翻页: `v2 go 2`
+- 翻页: `v2 go {number}`
+  默认 `v2 go` 前往下一页
+  默认 `v2 go -p` 返回上一页
 
 - 阅读指定帖子: `v2 read {postID}`
   如果曾阅读过列表，只输入 id 的后几位即可
