@@ -3,7 +3,7 @@
 
 ![install](https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png)
 ### 安装
-> 需要 NodeJS 8.0+ 环境 (不支持更低版本) [NodeJS 安装](https://nodejs.org/en/download/current/)
+> 需要 NodeJS 6.0+ 环境 (更低版本未测试) [NodeJS 安装](https://nodejs.org/en/download/current/)
 
 ```bash
 npm i -g v2ex-cli
