@@ -16,6 +16,17 @@ const getVersion = defaultVersion => {
   })
 }
 
+const translateVersion = version => {
+  return version.match(/\d+/g).reduce((p, n) => p + n, '')
+}
+
+const versionNeedUpdate = (latest, current) => {
+  if (Number.isNaN(+latest) || Number.isNaN(+current)) {
+    return false
+  }
+  return +latest > +current
+}
+
 module.exports = {
   check: async(log) => {
     const table = new Table({ chars: {'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' }})
@@ -24,7 +35,9 @@ module.exports = {
       const githubPkg = JSON.parse(await getVersion(currentVersion)) || {}
       log.stop()
       const latestVersion = githubPkg.version
-      if (latestVersion && latestVersion !== currentVersion) {
+      const latest = translateVersion(latestVersion)
+      const current = translateVersion(currentVersion)
+      if (latestVersion && versionNeedUpdate(latest, current)) {
         console.log('\n')
         table.push(
           [`V2EX CLI ${latestVersion} has been released`],
