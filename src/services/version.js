@@ -12,7 +12,7 @@ const getVersion = defaultVersion => {
     request(api).then(res => {
       clearTimeout(timer)
       resolve(res)
-    }).catch(e => reject(e))
+    }, () => ({})).catch(e => reject(e))
   })
 }
 

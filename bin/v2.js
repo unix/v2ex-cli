@@ -10,6 +10,7 @@ if (v < 5) {
   console.log('progress over stability ———— DHH')
   process.exit(1)
 }
+
 commander
   .version(version)
   .usage('<command> [options]')
