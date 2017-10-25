@@ -12,6 +12,18 @@ const makeHeader = async(headers = {}) => {
   }, headers)
 }
 
+const noErrorPromisifyShim = func => (...args) => new Promise(r => {
+  func(...args, (...results) => r(...results))
+})
+const makePromisify = () => {
+  const nativePromisify = require('util').promisify
+  if (nativePromisify && typeof nativePromisify === 'function') {
+    return nativePromisify
+  }
+  return noErrorPromisifyShim
+}
+const noErrorPromisify = makePromisify()
+
 const apis = {
   all: `${api}/topics/latest.json`,
   topic: `${api}/topics/show.json`,
@@ -28,7 +40,7 @@ const utils = {
   readDir: promisify(fs.readdir),
   readFile: promisify(fs.readFile),
   writeFile: promisify(fs.writeFile),
-  exists: promisify(fs.exists),
+  exists: noErrorPromisify(fs.exists),
   stat: promisify(fs.stat),
   spawnSync: childProcess.spawnSync,
 }
