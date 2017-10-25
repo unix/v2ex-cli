@@ -1,5 +1,4 @@
-## V2EX CLI [![npm version](https://badge.fury.io/js/v2ex-cli.svg)](http://badge.fury.io/js/v2ex-cli)
-![install](https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png)
+## V2EX CLI [![Build Status](https://travis-ci.org/WittBulter/v2ex-cli.svg?branch=master)](https://travis-ci.org/WittBulter/v2ex-cli)[![npm version](https://badge.fury.io/js/v2ex-cli.svg)](http://badge.fury.io/js/v2ex-cli)![install](https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png)
 
 
 ### 安装
