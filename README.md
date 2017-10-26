@@ -11,7 +11,7 @@ npm i -g v2ex-cli
 
 ### 使用
 - 增加自己的 cookie: `v2 install`
-  (获取 cookie 请在登录后打开浏览器控制台，在 network 中任意一个链接的头信息中找到)
+  (获取 cookie 请在登录后打开浏览器控制台，在 network 中找地址包含 `v2ex.com` 的链接，拷贝头信息中所有的 cookie 值)
 
 - 列表阅读: `v2 show`
 
