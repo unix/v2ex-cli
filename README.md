@@ -1,4 +1,4 @@
-## V2EX CLI   [![Build Status](https://travis-ci.org/WittBulter/v2ex-cli.svg?branch=master)](https://travis-ci.org/WittBulter/v2ex-cli)   [![npm version](https://badge.fury.io/js/v2ex-cli.svg)](http://badge.fury.io/js/v2ex-cli)
+## V2EX CLI   [![Build Status](https://travis-ci.org/WittBulter/v2ex-cli.svg?branch=master)](https://travis-ci.org/WittBulter/v2ex-cli)   [![npm version](https://badge.fury.io/js/v2ex-cli.svg)](http://badge.fury.io/js/v2ex-cli)   [![npm](https://img.shields.io/npm/dt/v2ex-cli.svg?style=plastic)](http://npm-stat.com/charts.html?package=v2ex-cli)
 
 
 ![install](https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png)
