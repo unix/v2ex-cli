@@ -1,9 +1,13 @@
-const { exists, spawnSync, writeFile, readFile } = require('./base')
-exists('./temp')
-  .then(bool => !bool && spawnSync('mkdir', ['./temp/']))
+const { exists, spawnSync, writeFile, readFile, mkdir } = require('./base')
+const init = async() => {
+  if (!await exists('./temp')) {
+    await mkdir('./temp/')
+  }
+}
 
 const storage = {
   set: async(key, value) => {
+    await init()
     const path = `./temp/${key}.txt`
     if (await exists(path)) spawnSync('rm', [path])
     await writeFile(path, JSON.stringify(value), 'utf-8')
@@ -22,6 +26,7 @@ const storage = {
   },
   
   write: async(name, content, encoding = 'utf-8') => {
+    await init()
     const path = `./temp/${name}`
     if (await exists(path)) spawnSync('rm', [path])
     await writeFile(path, content, encoding)

@@ -38,6 +38,7 @@ const apis = {
 
 const utils = {
   readDir: promisify(fs.readdir),
+  mkdir: promisify(fs.mkdir),
   readFile: promisify(fs.readFile),
   writeFile: promisify(fs.writeFile),
   exists: noErrorPromisify(fs.exists),
