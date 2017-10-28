@@ -11,7 +11,9 @@ npm i -g v2ex-cli
 
 ### 使用
 - 增加自己的 cookie: `v2 install`
-  (获取 cookie 请在登录后打开浏览器控制台，在 network 中找地址包含 `v2ex.com` 的链接，拷贝头信息中所有的 cookie 值)
+> 获取 cookie 请在登录后打开浏览器控制台，在 `network` 中找地址包含 `www.v2ex.com` 的链接，拷贝头信息中所有的 cookie 值
+> 需要拷贝所有的 cookie 值，注意是 `Request Header` 中包含的。
+> 可以参考这个 [Issue](https://github.com/WittBulter/v2ex-cli/issues/9)
 
 - 列表阅读: `v2 show`
 
@@ -44,7 +46,7 @@ npm i -g v2ex-cli
 工具暂时没有开放登录，只能通过 `v2 install` 手动添加 cookie 访问。因为目前 v2ex 添加了验证码，
 显示图片不能在所有终端做到非常好的兼容。同时错误的登录会导致 IP 被封锁一天。(v2ex 近期的策略太暴力了)
 
-
+> 如果你喜欢，记得点一个 star 支持这个项目...
 
 <p><details>
   <summary><b>预览</b> 点击打开</summary>
