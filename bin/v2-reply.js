@@ -28,14 +28,24 @@ const promps = [{
   const { reply } = await inquirer.prompt(promps)
   if (!reply || reply.length < 5) return console.log(chalk.red('Error: content length'))
   
+  const nextReply = async() => {
+    try {
+      const post = await posts.show(id)
+      if (!post || !post.id) return
+      histroy.add('post', `${post.id}||${post.once}||${post.title}`)
+    } catch (e) {
+    }
+  }
   try {
     submitLog.start()
     const res = await posts.reply(id, once, reply)
+    nextReply().then()
     submitLog.clear()
     if (res === 'ok') return submitLog.succeed('successful reply')
     submitLog.fail(String(res))
   } catch (e) {
     submitLog.clear()
     submitLog.fail(String(e))
+    nextReply().then()
   }
 })()
