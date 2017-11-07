@@ -1,11 +1,11 @@
 {
   "name": "v2ex-cli",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "v2ex-cli",
   "main": "index.js",
   "preferGlobal": true,
   "scripts": {
-    "build": "npm unlink && rm -r ./dist && webpack && npm link",
+    "start": "webpack --progress --watch",
     "ci": "webpack",
     "lint": "eslint src/** bin/**"
   },
