@@ -40,6 +40,7 @@
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "term-img": "^2.1.0",
+    "update-notifier": "^2.3.0",
     "util.promisify": "^1.0.0",
     "webpack": "^3.8.1"
   },

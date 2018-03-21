@@ -1,6 +1,10 @@
 const commander = require('commander')
 const chalk = require('chalk')
-const { version } = require('../package.json')
+const updateNotifier = require('update-notifier')
+const pkg = require('../package.json')
+
+updateNotifier({pkg}).notify()
+
 const v = process.version.match(/\d+/g)[0]
 if (v < 5) {
   console.log(chalk.yellow('require NodeJS 8.x+ version'))
@@ -10,7 +14,7 @@ if (v < 5) {
 }
 
 commander
-  .version(version)
+  .version(pkg.version)
   .usage('<command> [options]')
   .command('show [page]', 'display v2ex portal page')
   .command('read [id]', 'view a topic')
