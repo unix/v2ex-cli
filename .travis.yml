@@ -21,6 +21,6 @@ install:
   - npm i
 
 script:
-  - /bin/bash build/lint-commits.sh
+  - /bin/bash lint-commits.sh
   - npm run lint
   - npm run ci
