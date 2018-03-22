@@ -3,7 +3,7 @@ const chalk = require('chalk')
 const updateNotifier = require('update-notifier')
 const pkg = require('../package.json')
 
-updateNotifier({pkg}).notify()
+updateNotifier({ pkg }).notify()
 
 const v = process.version.match(/\d+/g)[0]
 if (v < 5) {
