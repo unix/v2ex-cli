@@ -1,18 +1,26 @@
-
 language: node_js
 
+cache:
+  directories:
+    - "node_modules"
+
 node_js:
-  - 8.1.0
+  - 8.6.0
+
+notifications:
+  email:
+    on_success: never
 
 branches:
   only:
     - master
 
+before_install: git fetch --depth=100
+
 install:
-  - npm i eslint -g
-  - npm i webpack -g
   - npm i
 
 script:
+  - /bin/bash lint-commits.sh
   - npm run lint
   - npm run ci

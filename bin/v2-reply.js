@@ -34,6 +34,7 @@ const promps = [{
       if (!post || !post.id) return
       histroy.add('post', `${post.id}||${post.once}||${post.title}`)
     } catch (e) {
+      console.log(e)
     }
   }
   try {
