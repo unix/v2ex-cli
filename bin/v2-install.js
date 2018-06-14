@@ -1,6 +1,6 @@
 const commander = require('commander')
 const inquirer = require('inquirer')
-const Table = require('cli-table2')
+const Table = require('cli-table3')
 const chalk = require('chalk')
 const ora = require('ora')
 const { storage } = require('../src/utils')

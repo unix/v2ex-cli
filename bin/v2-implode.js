@@ -1,5 +1,5 @@
 const chalk = require('chalk')
-const Table = require('cli-table2')
+const Table = require('cli-table3')
 const inquirer = require('inquirer')
 const ora = require('ora')
 const { spawnSync } = require('../src/utils')
