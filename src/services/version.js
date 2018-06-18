@@ -1,5 +1,5 @@
 const chalk = require('chalk')
-const Table = require('cli-table2')
+const Table = require('cli-table3')
 const { request } = require('../utils')
 const pkg = require('../../package.json')
 

@@ -1,4 +1,4 @@
-const Table = require('cli-table2')
+const Table = require('cli-table3')
 const ora = require('ora')
 const { storage, histroy } = require('../utils')
 const { index } = require('../pages/posts')
