@@ -1,7 +1,7 @@
-## V2EX CLI   [![Build Status](https://travis-ci.org/WittBulter/v2ex-cli.svg?branch=master)](https://travis-ci.org/WittBulter/v2ex-cli)   [![npm version](https://badge.fury.io/js/v2ex-cli.svg)](http://badge.fury.io/js/v2ex-cli)   [![npm](https://img.shields.io/npm/dt/v2ex-cli.svg?style=plastic)](http://npm-stat.com/charts.html?package=v2ex-cli)
+## V2EX CLI   [![Build Status](https://travis-ci.org/unix/v2ex-cli.svg?branch=master)](https://travis-ci.org/unix/v2ex-cli)   [![npm version](https://badge.fury.io/js/v2ex-cli.svg)](http://badge.fury.io/js/v2ex-cli)   [![npm](https://img.shields.io/npm/dt/v2ex-cli.svg?style=plastic)](http://npm-stat.com/charts.html?package=v2ex-cli)
 
 
-![install](https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png)
+![install](https://github.com/unix/v2ex-cli/blob/master/assets/install.png)
 ### 安装
 > 需要 NodeJS 6.0+ 环境 (更低版本未测试) [NodeJS 安装](https://nodejs.org/en/download/current/)
 
@@ -13,7 +13,7 @@ npm i -g v2ex-cli
 - 增加自己的 cookie: `v2 install`
 > 获取 cookie 请在登录后打开浏览器控制台，在 `network` 中找地址包含 `www.v2ex.com` 的链接，拷贝头信息中所有的 cookie 值
 > 需要拷贝所有的 cookie 值，注意是 `Request Header` 中包含的。
-> 可以参考这个 [Issue](https://github.com/WittBulter/v2ex-cli/issues/9)
+> 可以参考这个 [Issue](https://github.com/unix/v2ex-cli/issues/9)
 
 - 列表阅读: `v2 show`
 
@@ -53,23 +53,23 @@ npm i -g v2ex-cli
   <ul>
     <li>
       <h3>安装</h3>
-      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/install.png">
+      <img src="https://github.com/unix/v2ex-cli/blob/master/assets/install.png">
     </li>
     <li>
       <h3>列表</h3>
-      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/read.png">
+      <img src="https://github.com/unix/v2ex-cli/blob/master/assets/read.png">
     </li>
     <li>
       <h3>阅读</h3>
-      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/read2.png">
+      <img src="https://github.com/unix/v2ex-cli/blob/master/assets/read2.png">
     </li>
     <li>
       <h3>节点</h3>
-      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/node.png">
+      <img src="https://github.com/unix/v2ex-cli/blob/master/assets/node.png">
     </li>
     <li>
       <h3>回复</h3>
-      <img src="https://github.com/WittBulter/v2ex-cli/blob/master/assets/reply.png">
+      <img src="https://github.com/unix/v2ex-cli/blob/master/assets/reply.png">
     </li>
   </ul>
 </details></p>
